@@ -52,7 +52,7 @@ abstract class Personas {
 
 @Agent(description = "Generate a story based on user input and review it")
 @Profile("!test")
-public class WriteAndReviewAgent {
+public class CognitoScoreAgent {
 
     public record Story(String text) {
     }
@@ -94,7 +94,7 @@ public class WriteAndReviewAgent {
     private final int storyWordCount;
     private final int reviewWordCount;
 
-    WriteAndReviewAgent(
+    CognitoScoreAgent(
             @Value("${storyWordCount:100}") int storyWordCount,
             @Value("${reviewWordCount:100}") int reviewWordCount
     ) {
