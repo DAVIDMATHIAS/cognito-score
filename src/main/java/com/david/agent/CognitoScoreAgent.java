@@ -6,7 +6,6 @@ import com.embabel.agent.api.annotation.Action;
 import com.embabel.agent.api.annotation.Agent;
 import com.embabel.agent.api.annotation.Export;
 import com.embabel.agent.api.common.Ai;
-import com.embabel.agent.api.models.DeepSeekModels;
 import com.embabel.agent.domain.io.UserInput;
 import com.embabel.agent.domain.library.HasContent;
 import com.embabel.common.ai.model.LlmOptions;
@@ -41,12 +40,12 @@ public class CognitoScoreAgent {
         if (models == null || models.models().isEmpty()) {
             throw new RuntimeException("No models provided");
         }
-        
+
         // Create an executor service with a thread pool
         int totalTasks = models.models().size() * testKit.questions().size();
         ExecutorService executor = Executors.newFixedThreadPool(Math.min(totalTasks, 10));
         List<Future<ExamResponse>> futures = new ArrayList<>();
-        
+
         // Submit all tasks to the executor
         for (String modelAlias : models.models().keySet()) {
             for (Question question : testKit.questions()) {
@@ -60,7 +59,7 @@ public class CognitoScoreAgent {
                 futures.add(future);
             }
         }
-        
+
         // Collect all results
         List<ExamResponse> responses = new ArrayList<>();
         for (Future<ExamResponse> future : futures) {
@@ -70,7 +69,7 @@ public class CognitoScoreAgent {
                 throw new RuntimeException("Error executing test", e);
             }
         }
-        
+
         // Shutdown the executor
         executor.shutdown();
         try {
@@ -81,7 +80,7 @@ public class CognitoScoreAgent {
             executor.shutdownNow();
             Thread.currentThread().interrupt();
         }
-        
+
         EvaluationResult evaluationResult = ai.withLlm(models.evaluatorModel()).withPromptContributor(Personas.EVALUATOR).createObject(responses.toString(), EvaluationResult.class);
         return new FinalResult(evaluationResult, responses);
     }
