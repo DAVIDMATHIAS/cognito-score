@@ -31,18 +31,12 @@ public class CognitoScoreAgent {
     }
 
     @AchievesGoal(
-            description = "Evaluates all given LLM candiates and rank them",
-            export = @Export(remote = true, name = "LLM Evaluator"))
+            description = "Evaluates all given LLM candidates and rank them",
+            export = @Export(remote = true, name = "LLM Evaluator", startingInputTypes = Models.class))
 
     @Action
-    public FinalResult evaluateLLM(UserInput userInput, Ai ai, TestKit testKit) {
+    public FinalResult evaluateLLM(UserInput userInput, Ai ai, TestKit testKit, Models models) {
 
-        com.david.agent.models.Models models = null;
-        try {
-            models = objectMapper.readValue(userInput.getContent(), Models.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         if (models == null || models.models().isEmpty()) {
             throw new RuntimeException("No models provided");
         }
