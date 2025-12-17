@@ -17,7 +17,8 @@ ext {
 dependencies {
     implementation "com.embabel.agent:embabel-agent-starter:${embabelAgentVersion}"
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation "com.embabel.agent:embabel-agent-starter-shell:${embabelAgentVersion}"
+    //implementation "com.embabel.agent:embabel-agent-starter-shell:${embabelAgentVersion}"
+    implementation "com.embabel.agent:embabel-agent-a2a:${embabelAgentVersion}"
     implementation "com.embabel.agent:embabel-agent-starter-deepseek:${embabelAgentVersion}"
 /*    implementation "com.embabel.agent:embabel-agent-starter-openai:${embabelAgentVersion}"*/
     implementation "com.embabel.agent:embabel-agent-starter-anthropic:${embabelAgentVersion}"
