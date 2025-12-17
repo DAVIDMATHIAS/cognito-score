@@ -6,9 +6,7 @@ embabel-agent-api/src/main/resources/mcp/**
 */target/**
 */*/target/**
 */*/*/target/**
-/.gradle/**
-/.gradle/**/gc.properties
-/.gradle/**/*.bin
+
 .idea/**
 
 .claude
