@@ -82,15 +82,15 @@ public class CognitoScoreAgent {
             Thread.currentThread().interrupt();
         }
         
-        EvaluationResult evaluationResult = ai.withLlm(DeepSeekModels.DEEPSEEK_CHAT).withPromptContributor(Personas.EVALUATOR).createObject(responses.toString(), EvaluationResult.class);
+        EvaluationResult evaluationResult = ai.withLlm(models.evaluatorModel()).withPromptContributor(Personas.EVALUATOR).createObject(responses.toString(), EvaluationResult.class);
         return new FinalResult(evaluationResult, responses);
     }
 
     @Action
-    TestKit createTest(Ai ai) {
+    TestKit createTest(Ai ai, Models models) {
         return ai
                 // Higher temperature for more creative output
-                .withLlm(LlmOptions.withModel(DeepSeekModels.DEEPSEEK_CHAT)// You can also choose a specific model or role here
+                .withLlm(LlmOptions.withModel(models.evaluatorModel())// You can also choose a specific model or role here
                         .withTemperature(.5)
                 )
                 .withPromptContributor(Personas.TEST_DEVELOPER)
