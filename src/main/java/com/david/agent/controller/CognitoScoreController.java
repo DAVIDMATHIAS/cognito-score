@@ -11,18 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 public class CognitoScoreController {
 
     @Autowired
+    ObjectMapper objectMapper;
+    @Autowired
     private AgentPlatform agentPlatform;
 
-    @Autowired
-    ObjectMapper objectMapper;
     @PostMapping("/api/v1/run")
-    public CognitoScoreAgent.FinalResult runAgent(@RequestBody Models models) throws Exception{
+    public CognitoScoreAgent.FinalResult runAgent(@RequestBody Models models) throws Exception {
         String value = objectMapper.writeValueAsString(models);
         return AgentInvocation.create(agentPlatform, CognitoScoreAgent.FinalResult.class).invoke(new UserInput(value));
     }

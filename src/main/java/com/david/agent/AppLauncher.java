@@ -1,4 +1,3 @@
-
 package com.david.agent;
 
 import com.embabel.agent.config.annotation.EnableAgents;
