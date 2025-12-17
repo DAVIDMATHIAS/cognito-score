@@ -13,6 +13,6 @@ public abstract class Personas {
             .andBackstory("Strict examiner who just provide questions one by one and get responses back");
     public static RoleGoalBackstory EVALUATOR = RoleGoalBackstory
             .withRole("Evaluator")
-            .andGoal("Evaluates each LLM and rank each candidates, and assess the answers and provide scores for each candidates")
+            .andGoal("Question and answers from each LLM are given,Give rank and score for each LLM")
             .andBackstory("Has a PhD in Philosophy; used to work in a recruitment agency");
 }

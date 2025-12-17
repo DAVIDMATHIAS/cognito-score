@@ -5,6 +5,7 @@ import com.embabel.agent.api.annotation.Action;
 import com.embabel.agent.api.annotation.Agent;
 import com.embabel.agent.api.annotation.Export;
 import com.embabel.agent.api.common.Ai;
+import com.embabel.agent.api.models.AnthropicModels;
 import com.embabel.agent.api.models.DeepSeekModels;
 import com.embabel.agent.domain.library.HasContent;
 import com.embabel.common.ai.model.LlmOptions;
@@ -61,7 +62,7 @@ public class CognitoScoreAgent {
 
     @Action
     LLMCandidates candidates() {
-        List<String> llmNames = List.of(DeepSeekModels.DEEPSEEK_CHAT);
+        List<String> llmNames = List.of(AnthropicModels.CLAUDE_35_HAIKU,AnthropicModels.CLAUDE_37_SONNET);
         return new LLMCandidates(llmNames);
     }
 
@@ -107,7 +108,9 @@ public class CognitoScoreAgent {
             @JsonPropertyDescription("Name of the LLM")
             String name,
             @JsonPropertyDescription("Total Score of the LLM")
-            int score
+            int score,
+            @JsonPropertyDescription("Rank of the LLM")
+            int rank
     ){}
     public record EvaluationResult(
             List<NameAndScore> examResult
